@@ -1,6 +1,8 @@
 RCS		= pipex.c \
 utils.c \
+utils1.c \
 utils2.c \
+utils3.c \
 
 OBJS	= $(RCS:.c=.o)
 

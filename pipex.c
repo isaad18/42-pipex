@@ -1,82 +1,34 @@
 #include"pipex.h"
 
-int	ft_open(char *str)
-{
-	int	fd;
-
-	fd = open(str, O_RDWR | O_CREAT | O_TRUNC);
-	if (fd == -1)
-	{
-		write(1, "invalid fd\n", 11);
-		exit(-1);
-	}
-	return (fd);
-}
-
-char	*dupcmd(char *cmd, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != ' ' && str[i])
-		i++;
-	cmd = malloc(i + 2);
-	i = 0;
-	while (str[i] != ' ' && str[i])
-	{
-		cmd[i] = str[i];
-		i++;
-	}
-	cmd[i] = '\0';
-	return (cmd);
-}
-
 char	*checkpath(char *str, char **env, t_pipex *pip)
 {
 	char	*cmd;
 	char	*path;
 	char	*fpath;
 
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
+	makeit0(pip);
 	cmd = NULL;
 	cmd = dupcmd(cmd, str);
-	while (env[i] && ft_strncmp("PATH=", env[i], 5) == 0)
-		i++;
-	while (env[i][j] != '/')
-		j++;
-	while (env[i][j])
+	findallp(pip, env);
+	while (env[pip->i][pip->j])
 	{
-		path = ft_strdup(env[i], j);
+		path = ft_strdup(env[pip->i], pip->j);
 		fpath = ft_strjoin(path, cmd);
-		while (env[i][j] && env[i][j] != ':')
-			j++;
-		if (env[i][j] != '\0' && env[i][j] == ':')
-			j++;
+		pip->j = nextpath(env, pip->i, pip->j);
 		if (access(fpath, F_OK) == 0)
 		{
-			free(path);
-			free(cmd);
+			freecmd(path, cmd);
 			return (fpath);
 		}
 		else
 		{
-			free(path);
-			free(fpath);
+			freefpath(path, fpath);
 		}
 	}
-	if (env[i][j] == '\0')
-	{
-		free(cmd);
-		if (pip->c && pip->patharg[0] == '/')
-			free(pip->patharg);
-		exit (0);
-	}
+	checkcmd(env[pip->i][pip->j], cmd, pip);
 	return (fpath);
 }
+
 
 int	child1(t_pipex *pip, char **s, char **env, int pid2)
 {
