@@ -63,6 +63,15 @@ void	wordsplit(char **strs, char c, char const *s, int words)
 	strs[word] = 0;
 }
 
+int	ss(char *s, int i)
+{
+	while (s[i] && s[i] != ' ')
+		i++;
+	if (s[i] == ' ')
+		i++;
+	return (i);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**a;
@@ -77,3 +86,35 @@ char	**ft_split(char const *s, char c)
 	wordsplit(a, c, s, words);
 	return (a);
 }
+
+// char **echohandle(char const *s)
+// {
+// 	char	**a;
+// 	int		i;
+// 	int		j;
+// 	char	*c;
+
+// 	a = (char **)malloc((3) * sizeof(char *));
+// 	i = 0;
+// 	j = 0;
+// 	a[0] = "echo";
+// 	i = ss(s, i);
+// 	while (s[i])
+// 	{
+// 		i++;
+// 		j++;
+// 	}
+// 	c = malloc(j + 1);
+// 	i -= j;
+// 	j = 0;
+// 	while (s[i])
+// 	{
+// 		c[j] = s[i];
+// 		i++;
+// 		j++;
+// 	}
+// 	c[j] = 0;
+// 	a[1] = c;
+// 	a[2] = 0;
+// 	return (a);
+// }
