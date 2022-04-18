@@ -8,7 +8,7 @@ int	ft_open(char *str)
 	if (fd == -1)
 	{
 		write(1, "invalid fd\n", 11);
-		exit(-1);
+		exit(1);
 	}
 	return (fd);
 }
@@ -39,7 +39,7 @@ void	checkcmd(char c, char *cmd, t_pipex *pip)
 		if (pip->c && pip->patharg[0] == '/')
 			free(pip->patharg);
 		write (1, "zsh: command not found!", 23);
-		exit (0);
+		exit (127);
 	}
 }
 

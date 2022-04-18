@@ -89,6 +89,7 @@ int	main(int argc, char **argv, char **env)
 	}
 	else
 		write(STDERR_FILENO, "invalid number of arguments!\n", 29);
+	exit(0);
 	return (0);
 }
 
