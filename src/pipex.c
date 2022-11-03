@@ -1,4 +1,4 @@
-#include"pipex.h"
+#include"../includes/pipex.h"
 
 char	*checkpath(char *str, char **env, t_pipex *pip)
 {

@@ -1,8 +1,8 @@
-RCS		= pipex.c \
-utils.c \
-utils1.c \
-utils2.c \
-utils3.c \
+RCS		= ./src/pipex.c \
+./src/utils.c \
+./src/utils1.c \
+./src/utils2.c \
+./src/utils3.c \
 
 OBJS	= $(RCS:.c=.o)
 

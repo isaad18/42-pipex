@@ -1,4 +1,4 @@
-#include"pipex.h"
+#include"../includes/pipex.h"
 
 int	ft_open(char *str)
 {
